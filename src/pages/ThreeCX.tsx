@@ -1,5 +1,6 @@
 import { Server, CheckCircle, ArrowRight, Cloud, Building2, Smartphone } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 export default function ThreeCX() {
   const deploymentOptions = [
@@ -91,6 +92,12 @@ export default function ThreeCX() {
 
   return (
     <div>
+      <SEO
+        title="3CX PBX Systems Somerset & Dorset | Certified Partner | UKBTS"
+        description="Official 3CX certified partner providing advanced PBX phone systems for businesses in Somerset & Dorset. Professional installation and support."
+        keywords="3CX Somerset, 3CX Dorset, PBX systems, IP phone system, 3CX certified partner, business phone system"
+        canonicalUrl="/3cx"
+      />
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">

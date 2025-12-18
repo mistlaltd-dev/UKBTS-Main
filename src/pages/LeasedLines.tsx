@@ -1,5 +1,6 @@
 import { TrendingUp, CheckCircle, ArrowRight, Zap, Shield, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 export default function LeasedLines() {
   const speeds = [
@@ -28,6 +29,12 @@ export default function LeasedLines() {
 
   return (
     <div>
+      <SEO
+        title="Leased Lines Somerset & Dorset | Dedicated Connectivity | UKBTS"
+        description="Dedicated leased line connectivity for businesses in Somerset & Dorset. Guaranteed bandwidth with 24/7 monitoring and support."
+        keywords="leased lines Somerset, dedicated connectivity Dorset, ethernet circuits, point to point, guaranteed bandwidth"
+        canonicalUrl="/leased-lines"
+      />
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">

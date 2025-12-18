@@ -1,5 +1,6 @@
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
 import { useState } from 'react';
+import SEO from '../components/SEO';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -57,6 +58,12 @@ export default function Contact() {
 
   return (
     <div>
+      <SEO
+        title="Contact UKBTS | Somerset & Dorset Telecommunications"
+        description="Get in touch with UKBTS Telecommunications. Expert telecoms solutions for businesses across Somerset & Dorset."
+        keywords="contact UKBTS, Somerset telecoms, Dorset communications, get quote, telecoms consultation"
+        canonicalUrl="/contact"
+      />
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">

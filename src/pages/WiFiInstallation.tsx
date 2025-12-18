@@ -1,5 +1,6 @@
 import { Wifi, CheckCircle, ArrowRight, Radio, Shield, HeadphonesIcon, Network, Gauge, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 export default function WiFiInstallation() {
   const packages = [
@@ -91,6 +92,12 @@ export default function WiFiInstallation() {
 
   return (
     <div>
+      <SEO
+        title="WiFi Installation Somerset & Dorset | Business Wireless Networks | UKBTS"
+        description="Professional WiFi installation and wireless network solutions for Somerset & Dorset businesses. Enterprise-grade WiFi 6, site surveys, and expert support."
+        keywords="WiFi installation Somerset, wireless network Dorset, WiFi 6, business WiFi, site survey, access points, enterprise WiFi"
+        canonicalUrl="/wifi-installation"
+      />
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">

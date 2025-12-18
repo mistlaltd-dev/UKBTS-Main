@@ -1,5 +1,6 @@
 import { Wifi, CheckCircle, ArrowRight, Zap, Shield, HeadphonesIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 export default function Broadband() {
   const packages = [
@@ -73,6 +74,12 @@ export default function Broadband() {
 
   return (
     <div>
+      <SEO
+        title="Business Broadband Somerset & Dorset | FTTC & FTTP | UKBTS"
+        description="High-speed business broadband for Somerset & Dorset. FTTC and FTTP connections with dedicated support and competitive pricing."
+        keywords="business broadband Somerset, FTTC Dorset, FTTP Somerset, fibre broadband, dedicated internet, business internet"
+        canonicalUrl="/broadband"
+      />
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">

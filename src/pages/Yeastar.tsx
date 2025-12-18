@@ -1,5 +1,6 @@
 import { Network, CheckCircle, ArrowRight, Building, Factory, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 export default function Yeastar() {
   const models = [
@@ -44,6 +45,12 @@ export default function Yeastar() {
 
   return (
     <div>
+      <SEO
+        title="Yeastar PBX Somerset & Dorset | Authorized Partner | UKBTS"
+        description="Authorized Yeastar PBX partner in Somerset & Dorset. Scalable IP phone systems with advanced features for growing businesses."
+        keywords="Yeastar Somerset, Yeastar PBX, IP PBX systems, Yeastar dealer, business phone system Dorset"
+        canonicalUrl="/yeastar"
+      />
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">

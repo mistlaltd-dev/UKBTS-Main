@@ -1,5 +1,6 @@
 import { Phone, CheckCircle, ArrowRight, Users, Cloud, Smartphone, Headset, Shield, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 export default function PhoneSystems() {
   const benefits = [
@@ -95,6 +96,12 @@ export default function PhoneSystems() {
 
   return (
     <div>
+      <SEO
+        title="Business Phone Systems Somerset & Dorset | VoIP PBX Solutions | UKBTS"
+        description="Business phone systems for Somerset & Dorset including 3CX and Yeastar. Cloud and on-premise VoIP PBX solutions with professional installation in Taunton, Yeovil, Bournemouth, and Weymouth."
+        keywords="business phone systems Somerset, VoIP phone system Dorset, IP PBX, cloud phone system, 3CX Taunton, Yeastar Yeovil, phone system Bournemouth, PBX Weymouth"
+        canonicalUrl="/phone-systems"
+      />
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">

@@ -1,5 +1,6 @@
 import { Phone, CheckCircle, ArrowRight, TrendingDown, Shield, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 export default function SipTrunks() {
   const benefits = [
@@ -70,6 +71,12 @@ export default function SipTrunks() {
 
   return (
     <div>
+      <SEO
+        title="SIP Trunks Somerset & Dorset | VoIP Solutions | UKBTS"
+        description="Professional SIP trunk solutions for businesses in Somerset & Dorset. Cost-effective VoIP telephony with reliable call quality and scalability."
+        keywords="SIP trunks Somerset, VoIP trunks Dorset, business VoIP, SIP providers UK, cost-effective telephony, cloud telephony"
+        canonicalUrl="/sip-trunks"
+      />
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">

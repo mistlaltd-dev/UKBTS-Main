@@ -1,5 +1,6 @@
 import { Settings, CheckCircle, ArrowRight, Monitor, HeadphonesIcon, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 export default function Management() {
   const services = [
@@ -64,6 +65,12 @@ export default function Management() {
 
   return (
     <div>
+      <SEO
+        title="Managed Telecoms Services Somerset & Dorset | 24/7 Support | UKBTS"
+        description="Comprehensive managed telecoms services in Somerset & Dorset. 24/7 support, proactive monitoring, and expert consultation."
+        keywords="managed telecoms, IT support Somerset, 24/7 support, telecoms management, proactive monitoring Dorset"
+        canonicalUrl="/management"
+      />
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
