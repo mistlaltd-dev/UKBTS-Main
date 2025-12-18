@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "prerender": "rm -f dist/200.html && react-snap || echo 'Prerendering skipped - Chrome not available'",
+    "prerender": "rm -f dist/200.html && react-snap",
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.app.json"
@@ -43,6 +43,7 @@
       "removeComments": true
     },
     "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage", "--disable-gpu"],
+    "puppeteerExecutablePath": "/usr/bin/google-chrome-stable",
     "inlineCss": true,
     "include": [
       "/",
