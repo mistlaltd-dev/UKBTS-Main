@@ -42,7 +42,7 @@
       "collapseWhitespace": true,
       "removeComments": true
     },
-    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
+    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage", "--disable-gpu"],
     "inlineCss": true,
     "include": [
       "/",
