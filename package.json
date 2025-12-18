@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "prerender": "rm -f dist/200.html && react-snap",
+    "build": "vite build && node generate-pages.js",
+    "prerender": "node generate-pages.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.app.json"
@@ -17,8 +17,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
-    "react-router-dom": "^7.9.6",
-    "react-snap": "^1.23.0"
+    "react-router-dom": "^7.9.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
@@ -35,29 +34,5 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.3.0",
     "vite": "^5.4.2"
-  },
-  "reactSnap": {
-    "source": "dist",
-    "minifyHtml": {
-      "collapseWhitespace": true,
-      "removeComments": true
-    },
-    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage", "--disable-gpu"],
-    "puppeteerExecutablePath": "/usr/bin/google-chrome-stable",
-    "inlineCss": true,
-    "include": [
-      "/",
-      "/sip-trunks",
-      "/broadband",
-      "/3cx",
-      "/yeastar",
-      "/leased-lines",
-      "/management",
-      "/wifi-installation",
-      "/phone-systems",
-      "/contact"
-    ],
-    "skipThirdPartyRequests": true,
-    "headless": true
   }
 }

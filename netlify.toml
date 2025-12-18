@@ -5,7 +5,7 @@ status = 200
 
 [build]
 publish = "dist"
-command = "npm run build && npm run prerender"
+command = "npm run build"
 
 [build.environment]
 CI = "true"
