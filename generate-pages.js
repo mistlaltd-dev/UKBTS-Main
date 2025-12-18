@@ -78,6 +78,8 @@ function generateMetaTags(route) {
     <meta property="og:title" content="${meta.title}" />
     <meta property="og:description" content="${meta.description}" />
     <meta property="og:image" content="${OG_IMAGE}" />
+    <meta property="og:image:width" content="436" />
+    <meta property="og:image:height" content="97" />
     <meta property="og:site_name" content="UKBTS Telecommunications" />
 
     <!-- Twitter Card -->
