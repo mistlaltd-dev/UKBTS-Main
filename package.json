@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "postbuild": "react-snap || echo 'Prerendering skipped - Chrome not available'",
+    "build": "vite build && npm run prerender",
+    "prerender": "react-snap || echo 'Prerendering skipped - Chrome not available'",
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.app.json"
