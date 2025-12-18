@@ -1,9 +1,10 @@
 [build]
-  command = "npm ci --include=dev && npm run build"
+  command = "npm ci --include=dev && npx puppeteer browsers install chrome && npm run build"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "18"
+  PUPPETEER_CACHE_DIR = "/opt/buildhome/.cache/puppeteer"
 
 [[redirects]]
   from = "/*"

@@ -57,7 +57,6 @@
       "/contact"
     ],
     "skipThirdPartyRequests": true,
-    "headless": true,
-    "puppeteerExecutablePath": null
+    "headless": true
   }
 }
