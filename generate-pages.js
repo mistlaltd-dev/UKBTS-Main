@@ -73,14 +73,17 @@ function generateMetaTags(route) {
     <title>${meta.title}</title>
 
     <!-- Open Graph / Social Media -->
+    <meta property="og:locale" content="en_GB" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="${fullUrl}" />
+    <meta property="og:site_name" content="UKBTS Telecommunications" />
     <meta property="og:title" content="${meta.title}" />
     <meta property="og:description" content="${meta.description}" />
+    <meta property="og:url" content="${fullUrl}" />
     <meta property="og:image" content="${OG_IMAGE}" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1000" />
     <meta property="og:image:height" content="544" />
-    <meta property="og:site_name" content="UKBTS Telecommunications" />
+    <meta property="og:image:alt" content="${meta.title}" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />

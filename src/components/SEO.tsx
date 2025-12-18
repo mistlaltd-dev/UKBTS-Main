@@ -32,14 +32,17 @@ export default function SEO({
       <meta name="robots" content={noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
       <link rel="canonical" href={fullUrl} />
 
+      <meta property="og:locale" content="en_GB" />
       <meta property="og:type" content={ogType} />
-      <meta property="og:url" content={fullUrl} />
+      <meta property="og:site_name" content="UKBTS Telecommunications" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
+      <meta property="og:url" content={fullUrl} />
       <meta property="og:image" content={ogImage} />
+      <meta property="og:image:type" content="image/png" />
       <meta property="og:image:width" content="1000" />
       <meta property="og:image:height" content="544" />
-      <meta property="og:site_name" content="UKBTS Telecommunications" />
+      <meta property="og:image:alt" content={title} />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
