@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && npm run prerender",
-    "prerender": "react-snap || echo 'Prerendering skipped - Chrome not available'",
+    "prerender": "rm -f dist/200.html && react-snap || echo 'Prerendering skipped - Chrome not available'",
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.app.json"
