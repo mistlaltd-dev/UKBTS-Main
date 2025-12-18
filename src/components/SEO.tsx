@@ -11,7 +11,7 @@ interface SEOProps {
 }
 
 const BASE_URL = 'https://www.ukbts.co.uk';
-const DEFAULT_OG_IMAGE = `${BASE_URL}/hero4.jpg`;
+const DEFAULT_OG_IMAGE = `${BASE_URL}/ogimage.png`;
 
 export default function SEO({
   title,
@@ -37,8 +37,8 @@ export default function SEO({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
-      <meta property="og:image:width" content="1600" />
-      <meta property="og:image:height" content="896" />
+      <meta property="og:image:width" content="1000" />
+      <meta property="og:image:height" content="544" />
       <meta property="og:site_name" content="UKBTS Telecommunications" />
 
       <meta name="twitter:card" content="summary_large_image" />

@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 const BASE_URL = 'https://www.ukbts.co.uk';
-const OG_IMAGE = `${BASE_URL}/hero4.jpg`;
+const OG_IMAGE = `${BASE_URL}/ogimage.png`;
 
 const pageMetadata = {
   '/': {
@@ -78,8 +78,8 @@ function generateMetaTags(route) {
     <meta property="og:title" content="${meta.title}" />
     <meta property="og:description" content="${meta.description}" />
     <meta property="og:image" content="${OG_IMAGE}" />
-    <meta property="og:image:width" content="1600" />
-    <meta property="og:image:height" content="896" />
+    <meta property="og:image:width" content="1000" />
+    <meta property="og:image:height" content="544" />
     <meta property="og:site_name" content="UKBTS Telecommunications" />
 
     <!-- Twitter Card -->
