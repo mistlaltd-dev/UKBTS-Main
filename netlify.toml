@@ -1,11 +1,10 @@
 [build]
-  command = "npm run build && npm run prerender"
+  command = "npm ci && npm run build"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "18"
-  PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
-  PUPPETEER_EXECUTABLE_PATH = "/usr/bin/chromium-browser"
+  NPM_FLAGS = "--include=dev"
 
 [[redirects]]
   from = "/*"
