@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npm run prerender",
+    "build": "vite build",
     "prerender": "rm -f dist/200.html && react-snap || echo 'Prerendering skipped - Chrome not available'",
     "lint": "eslint .",
     "preview": "vite preview",
