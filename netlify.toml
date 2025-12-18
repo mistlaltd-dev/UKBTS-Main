@@ -7,6 +7,9 @@ status = 200
 publish = "dist"
 command = "npm run build && npm run prerender"
 
+[build.environment]
+CI = "true"
+
 [[headers]]
 for = "/assets/*"
 
