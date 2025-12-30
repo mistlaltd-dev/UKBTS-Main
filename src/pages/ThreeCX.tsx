@@ -116,7 +116,7 @@ export default function ThreeCX() {
   to="https://www.3cx.com/phone-system/download-phone-system/?resellerId=243873"
                 className="bg-cyan-500 text-white px-8 py-4 rounded-lg hover:bg-cyan-600 transition-all font-semibold text-lg shadow-lg hover:shadow-cyan-500/50 inline-flex items-center gap-2"
               >
-                Get a Demo <ArrowRight size={20} />
+                Try Free <ArrowRight size={20} />
               </Link>
             </div>
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
