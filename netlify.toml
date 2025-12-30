@@ -5,7 +5,7 @@ status = 200
 
 [build]
 publish = "dist"
-command = "npx vite build"
+command = "npm run build && npm run prerender"
 
 [build.environment]
 CI = "true"

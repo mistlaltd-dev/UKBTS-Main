@@ -113,7 +113,7 @@ export default function ThreeCX() {
                 by businesses across Taunton, Yeovil, Bournemouth, and throughout the region.
               </p>
               <Link
-  to="https://www.3cx.com/phone-system/download-phone-system/?resellerId=243873"
+  to="/contact"
                 className="bg-cyan-500 text-white px-8 py-4 rounded-lg hover:bg-cyan-600 transition-all font-semibold text-lg shadow-lg hover:shadow-cyan-500/50 inline-flex items-center gap-2"
               >
                 Get a Demo <ArrowRight size={20} />
