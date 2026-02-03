@@ -73,7 +73,7 @@ export default function Layout({ children }: LayoutProps) {
   const loginOptions = [
     {
       name: 'Cloud Portal',
-      url: 'https://portal.mistla.com/portal',
+      url: 'https://hsp.ukbts.co.uk',
       description: 'Access your cloud management portal',
       icon: Cloud,
       external: true
