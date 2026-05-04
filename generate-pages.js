@@ -139,10 +139,13 @@ function buildPageHtml(route, appHtml) {
   html = html.replace(/<meta\s+name="twitter:description"(?![^>]*data-rh)[^>]*\/?>/gi, '');
   html = html.replace(/<meta\s+name="twitter:image"(?![^>]*data-rh)[^>]*\/?>/gi, '');
 
+  // Strip data-rh tags from SSR output — static injection above is the source of truth
+  const cleanAppHtml = appHtml.replace(/<[^>]+data-rh="true"[^>]*\/?>/g, '');
+
   // Inject all meta tags before </head>
   html = html.replace('</head>', `    ${metaTags}\n  </head>`);
   // Inject rendered app HTML into root div
-  html = html.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
+  html = html.replace('<div id="root"></div>', `<div id="root">${cleanAppHtml}</div>`);
 
   return html;
 }
