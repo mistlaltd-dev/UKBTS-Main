@@ -115,14 +115,29 @@ function buildPageHtml(route, appHtml) {
 
   let html = templateHtml;
 
-  // Strip all existing SEO meta tags so we don't get duplicates
-  html = html.replace(/<title>[^<]*<\/title>/g, '');
-  html = html.replace(/<meta\s+name="description"[^>]*>/gi, '');
-  html = html.replace(/<meta\s+name="keywords"[^>]*>/gi, '');
-  html = html.replace(/<meta\s+name="robots"[^>]*>/gi, '');
-  html = html.replace(/<link\s+rel="canonical"[^>]*>/gi, '');
-  html = html.replace(/<meta\s+property="og:[^"]*"[^>]*>/gi, '');
-  html = html.replace(/<meta\s+name="twitter:[^"]*"[^>]*>/gi, '');
+  // Strip static (non-data-rh) SEO tags from the template so page-specific
+  // ones injected below are the only copy. data-rh tags are added client-side
+  // after hydration and are not present in the static template.
+  html = html.replace(/<title>(?!.*data-rh)[^<]*<\/title>/g, '');
+  html = html.replace(/<meta\s+name="description"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+name="keywords"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+name="robots"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<link\s+rel="canonical"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+property="og:title"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+property="og:description"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+property="og:url"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+property="og:image:alt"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+property="og:locale"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+property="og:type"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+property="og:site_name"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+property="og:image"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+property="og:image:type"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+property="og:image:width"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+property="og:image:height"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+name="twitter:card"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+name="twitter:title"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+name="twitter:description"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  html = html.replace(/<meta\s+name="twitter:image"(?![^>]*data-rh)[^>]*\/?>/gi, '');
 
   // Inject all meta tags before </head>
   html = html.replace('</head>', `    ${metaTags}\n  </head>`);

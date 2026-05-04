@@ -3,72 +3,16 @@ import { useLocation } from 'react-router-dom';
 
 const baseUrl = 'https://ukbts.co.uk';
 
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "TelecommunicationsOrganization",
-  "name": "UKBTS Telecommunications",
-  "url": baseUrl,
-  "logo": `${baseUrl}/UKBTS.png`,
-  "image": `${baseUrl}/UKBTS.png`,
-  "description": "Leading VoIP, broadband, and PBX provider for Somerset & Dorset businesses. SIP trunks, business broadband, 3CX, Yeastar, leased lines, and managed services.",
-  "email": "contact@ukbts.co.uk",
-  "telephone": "+44-333-358-3976",
-  "address": {
-    "@type": "PostalAddress",
-    "addressRegion": "Somerset",
-    "addressCountry": "GB"
-  },
-  "areaServed": [
-    {
-      "@type": "City",
-      "name": "Taunton"
-    },
-    {
-      "@type": "City",
-      "name": "Yeovil"
-    },
-    {
-      "@type": "City",
-      "name": "Bridgwater"
-    },
-    {
-      "@type": "City",
-      "name": "Bournemouth"
-    },
-    {
-      "@type": "City",
-      "name": "Poole"
-    },
-    {
-      "@type": "City",
-      "name": "Weymouth"
-    }
-  ],
-  "sameAs": [],
-  "priceRange": "$$"
-};
-
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "UKBTS Telecommunications",
   "url": baseUrl,
-  "telephone": "+44-333-358-3976",
+  "telephone": "+443333583976",
   "email": "contact@ukbts.co.uk",
-  "address": {
-    "@type": "PostalAddress",
-    "addressRegion": "Somerset",
-    "addressCountry": "GB"
-  },
-  "geo": {
-    "@type": "GeoCircle",
-    "geoMidpoint": {
-      "@type": "GeoCoordinates",
-      "latitude": "51.0",
-      "longitude": "-2.5"
-    },
-    "geoRadius": "50000"
-  },
+  "description": "Business VoIP, PBX systems, broadband and telecoms services for Somerset and Dorset.",
+  "areaServed": ["Taunton", "Yeovil", "Bridgwater", "Bournemouth", "Poole", "Weymouth", "Dorchester", "Somerset", "Dorset"],
+  "serviceType": ["Business Phone Systems", "SIP Trunks", "Business Broadband", "3CX PBX", "Yeastar PBX", "Leased Lines", "WiFi Installation", "Managed Telecoms Services"],
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
@@ -186,17 +130,6 @@ const serviceSchemas: Record<string, any> = {
   }
 };
 
-const localBusinessSchemaV2 = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "UKBTS Telecommunications",
-  "url": "https://ukbts.co.uk",
-  "telephone": "+443333583976",
-  "email": "contact@ukbts.co.uk",
-  "description": "Business VoIP, PBX systems, broadband and telecoms services for Somerset and Dorset.",
-  "areaServed": ["Taunton","Yeovil","Bridgwater","Bournemouth","Poole","Weymouth","Dorchester","Somerset","Dorset"],
-  "serviceType": ["Business Phone Systems","SIP Trunks","Business Broadband","3CX PBX","Yeastar PBX","Leased Lines","WiFi Installation","Managed Telecoms Services"]
-};
 
 const faqSchemas: Record<string, any> = {
   '/phone-systems': {
@@ -447,9 +380,7 @@ export default function StructuredData() {
       document.head.appendChild(script);
     };
 
-    addSchema(organizationSchema);
     addSchema(localBusinessSchema);
-    addSchema(localBusinessSchemaV2);
 
     const path = location.pathname;
     if (serviceSchemas[path]) {
