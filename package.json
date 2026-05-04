@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node generate-pages.js",
-    "prerender": "node generate-pages.js",
+    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist/server && node generate-pages.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.app.json"

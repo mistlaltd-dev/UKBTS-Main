@@ -1,5 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const BASE_URL = 'https://www.ukbts.co.uk';
 const OG_IMAGE = `${BASE_URL}/ogimage.png`;
@@ -58,21 +61,22 @@ const pageMetadata = {
 };
 
 const routes = Object.keys(pageMetadata);
+const distDir = path.join(__dirname, 'dist');
 
-const distDir = './dist';
-let indexHtml = fs.readFileSync(path.join(distDir, 'index.html'), 'utf-8');
+// Import the SSR bundle
+const { render } = await import('./dist/server/entry-server.js');
 
-function generateMetaTags(route) {
+const templateHtml = fs.readFileSync(path.join(distDir, 'index.html'), 'utf-8');
+
+function buildPageHtml(route, appHtml) {
   const meta = pageMetadata[route];
   const fullUrl = route === '/' ? BASE_URL : `${BASE_URL}${route}`;
 
-  return `<!-- SEO Meta Tags -->
+  const metaTags = `<title>${meta.title}</title>
     <meta name="description" content="${meta.description}" />
     <meta name="keywords" content="${meta.keywords}" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <title>${meta.title}</title>
-
-    <!-- Open Graph / Social Media -->
+    <link rel="canonical" href="${fullUrl}" />
     <meta property="og:locale" content="en_GB" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="UKBTS Telecommunications" />
@@ -84,41 +88,61 @@ function generateMetaTags(route) {
     <meta property="og:image:width" content="1000" />
     <meta property="og:image:height" content="544" />
     <meta property="og:image:alt" content="${meta.title}" />
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${meta.title}" />
     <meta name="twitter:description" content="${meta.description}" />
-    <meta name="twitter:image" content="${OG_IMAGE}" />
+    <meta name="twitter:image" content="${OG_IMAGE}" />`;
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="${fullUrl}" />`;
+  let html = templateHtml;
+
+  // Replace <title> tag
+  html = html.replace(/<title>[^<]*<\/title>/, '');
+  // Inject all meta tags before </head>
+  html = html.replace('</head>', `    ${metaTags}\n  </head>`);
+  // Inject rendered app HTML into root div
+  html = html.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
+
+  return html;
 }
 
-function replaceMetaTags(html, route) {
-  const metaTagsRegex = /<!-- SEO Meta Tags -->[\s\S]*?<!-- Twitter Card -->[\s\S]*?<meta name="twitter:image"[^>]*>/;
-  const newMetaTags = generateMetaTags(route);
+// Generate each page
+for (const route of routes) {
+  const appHtml = render(route);
+  const pageHtml = buildPageHtml(route, appHtml);
 
-  let modifiedHtml = html.replace(metaTagsRegex, newMetaTags);
-
-  return modifiedHtml;
-}
-
-routes.forEach(route => {
-  if (route === '/') return;
-
-  const routeDir = path.join(distDir, route);
-
-  if (!fs.existsSync(routeDir)) {
-    fs.mkdirSync(routeDir, { recursive: true });
+  if (route === '/') {
+    fs.writeFileSync(path.join(distDir, 'index.html'), pageHtml);
+    console.log(`Generated: index.html`);
+  } else {
+    const routeDir = path.join(distDir, route);
+    if (!fs.existsSync(routeDir)) {
+      fs.mkdirSync(routeDir, { recursive: true });
+    }
+    fs.writeFileSync(path.join(routeDir, 'index.html'), pageHtml);
+    console.log(`Generated: ${route}/index.html`);
   }
+}
 
-  const pageHtml = replaceMetaTags(indexHtml, route);
-  fs.writeFileSync(path.join(routeDir, 'index.html'), pageHtml);
-  console.log(`Generated: ${route}/index.html`);
+// Generate sitemap.xml
+const lastmod = '2026-05-04';
+const sitemapEntries = routes.map(route => {
+  const fullUrl = route === '/' ? BASE_URL : `${BASE_URL}${route}`;
+  const priority = route === '/' ? '1.0' : '0.8';
+  const changefreq = route === '/' ? 'weekly' : 'monthly';
+  return `  <url>
+    <loc>${fullUrl}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
 });
 
-fs.copyFileSync(path.join(distDir, 'index.html'), path.join(distDir, '200.html'));
-console.log('Generated: 200.html (fallback)');
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapEntries.join('\n')}
+</urlset>`;
+
+fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemap);
+console.log('Generated: sitemap.xml');
 
 console.log('Static page generation complete!');
