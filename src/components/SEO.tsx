@@ -10,7 +10,7 @@ interface SEOProps {
   noIndex?: boolean;
 }
 
-const BASE_URL = 'https://www.ukbts.co.uk';
+const BASE_URL = 'https://ukbts.co.uk';
 const DEFAULT_OG_IMAGE = `${BASE_URL}/ogimage.png`;
 
 export default function SEO({

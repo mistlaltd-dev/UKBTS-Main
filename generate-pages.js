@@ -4,58 +4,78 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const BASE_URL = 'https://www.ukbts.co.uk';
+const BASE_URL = 'https://ukbts.co.uk';
 const OG_IMAGE = `${BASE_URL}/ogimage.png`;
 
 const pageMetadata = {
   '/': {
-    title: 'UKBTS Telecommunications - VoIP, Broadband & PBX Provider | Somerset & Dorset',
-    description: 'Leading VoIP, broadband, and PBX provider for Somerset & Dorset businesses. SIP trunks, business broadband, 3CX, Yeastar, leased lines, and managed services.',
+    title: 'UKBTS Telecommunications | VoIP, PBX & Broadband – Somerset & Dorset',
+    description: 'UKBTS provides business phone systems, SIP trunks, broadband, leased lines and WiFi installation across Somerset and Dorset. Get a free quote today.',
+    ogTitle: 'UKBTS Telecommunications | Somerset & Dorset',
+    ogDescription: 'Expert telecoms for Somerset & Dorset businesses. VoIP, PBX, broadband, leased lines & WiFi. Call 0333 358 3976.',
     keywords: 'VoIP provider Somerset, business broadband Dorset, PBX systems, SIP trunks, telecommunications Somerset, 3CX partner, Yeastar dealer, leased lines',
   },
+  '/phone-systems': {
+    title: 'Business Phone Systems Somerset & Dorset | 3CX & Yeastar PBX | UKBTS',
+    description: 'Modern VoIP business phone systems for Somerset and Dorset. UKBTS supply and install 3CX and Yeastar PBX systems with full support. Request a free consultation.',
+    ogTitle: 'Business Phone Systems – Somerset & Dorset | UKBTS',
+    ogDescription: 'Feature-rich VoIP phone systems for businesses across Taunton, Yeovil, Bournemouth and the South West. Free consultation available.',
+    keywords: 'business phone systems Somerset, VoIP phone system Dorset, IP PBX, cloud phone system, 3CX Taunton, Yeastar Yeovil, phone system Bournemouth, PBX Weymouth',
+  },
   '/sip-trunks': {
-    title: 'SIP Trunks Somerset & Dorset | VoIP Solutions | UKBTS',
-    description: 'Professional SIP trunk solutions for businesses in Somerset & Dorset. Cost-effective VoIP telephony with reliable call quality and scalability.',
+    title: 'SIP Trunks Somerset & Dorset | Replace ISDN – Save Up to 60% | UKBTS',
+    description: 'Cost-effective SIP trunks for Somerset and Dorset businesses. Replace expensive ISDN lines with flexible VoIP. Instant deployment, keep your existing numbers. Get a quote.',
+    ogTitle: 'SIP Trunks – Somerset & Dorset | UKBTS',
+    ogDescription: 'Save up to 60% on calls. Flexible UK SIP trunks with 99.9% uptime. Serving Taunton, Yeovil, Bournemouth and across the South West.',
     keywords: 'SIP trunks Somerset, VoIP trunks Dorset, business VoIP, SIP providers UK, cost-effective telephony, cloud telephony',
   },
   '/broadband': {
-    title: 'Business Broadband Somerset & Dorset | FTTC & FTTP | UKBTS',
-    description: 'High-speed business broadband for Somerset & Dorset. FTTC and FTTP connections with dedicated support and competitive pricing.',
+    title: 'Business Broadband Somerset & Dorset | FTTC, FTTP & Leased Lines | UKBTS',
+    description: 'Business broadband for Somerset and Dorset. FTTC up to 80Mbps, FTTP up to 1Gbps, and dedicated leased lines. Static IP included, 99.9% uptime SLA. Check availability.',
+    ogTitle: 'Business Broadband – Somerset & Dorset | UKBTS',
+    ogDescription: 'High-speed business internet from FTTC to 10Gbps leased lines. Serving Taunton, Yeovil, Bournemouth and all of Somerset & Dorset.',
     keywords: 'business broadband Somerset, FTTC Dorset, FTTP Somerset, fibre broadband, dedicated internet, business internet',
   },
   '/3cx': {
-    title: '3CX PBX Systems Somerset & Dorset | Certified Partner | UKBTS',
-    description: 'Official 3CX certified partner providing advanced PBX phone systems for businesses in Somerset & Dorset. Professional installation and support.',
+    title: '3CX PBX Somerset & Dorset | Certified 3CX Partner | Installation & Support | UKBTS',
+    description: 'Certified 3CX partner supplying, installing and supporting 3CX phone systems across Somerset and Dorset. Cloud, on-premise and hybrid deployment. Book a free demo.',
+    ogTitle: '3CX PBX Systems – Somerset & Dorset | UKBTS',
+    ogDescription: 'Award-winning 3CX unified communications for Somerset & Dorset businesses. Save up to 80% vs traditional PBX. Certified installation & support.',
     keywords: '3CX Somerset, 3CX Dorset, PBX systems, IP phone system, 3CX certified partner, business phone system',
   },
   '/yeastar': {
-    title: 'Yeastar PBX Somerset & Dorset | Authorized Partner | UKBTS',
-    description: 'Authorized Yeastar PBX partner in Somerset & Dorset. Scalable IP phone systems with advanced features for growing businesses.',
+    title: 'Yeastar PBX Somerset & Dorset | Authorised Partner | S-Series & P-Series | UKBTS',
+    description: 'Authorised Yeastar partner supplying S-Series, P-Series and Cloud PBX systems across Somerset and Dorset. Industry solutions for hospitality, healthcare and manufacturing. Get a quote.',
+    ogTitle: 'Yeastar PBX – Somerset & Dorset | UKBTS',
+    ogDescription: 'Authorised Yeastar partner. Scalable IP PBX from 5 to 2,000+ users. Serving Taunton, Yeovil, Bournemouth and across the South West.',
     keywords: 'Yeastar Somerset, Yeastar PBX, IP PBX systems, Yeastar dealer, business phone system Dorset',
   },
   '/leased-lines': {
-    title: 'Leased Lines Somerset & Dorset | Dedicated Connectivity | UKBTS',
-    description: 'Dedicated leased line connectivity for businesses in Somerset & Dorset. Guaranteed bandwidth with 24/7 monitoring and support.',
+    title: 'Leased Lines Somerset & Dorset | 100Mbps–10Gbps Dedicated Connectivity | UKBTS',
+    description: 'Dedicated leased lines for Somerset and Dorset businesses. 100Mbps from £299/month, 1Gbps from £599/month. Guaranteed symmetric speeds, 99.9%+ uptime SLA. Request a survey.',
+    ogTitle: 'Leased Lines – Somerset & Dorset | UKBTS',
+    ogDescription: 'Uncontended dedicated internet connections. 100Mbps to 10Gbps. 99.9%+ uptime. Serving Somerset, Dorset & the South West.',
     keywords: 'leased lines Somerset, dedicated connectivity Dorset, ethernet circuits, point to point, guaranteed bandwidth',
   },
-  '/management': {
-    title: 'Managed Telecoms Services Somerset & Dorset | 24/7 Support | UKBTS',
-    description: 'Comprehensive managed telecoms services in Somerset & Dorset. 24/7 support, proactive monitoring, and expert consultation.',
-    keywords: 'managed telecoms, IT support Somerset, 24/7 support, telecoms management, proactive monitoring Dorset',
-  },
   '/wifi-installation': {
-    title: 'WiFi Installation Somerset & Dorset | Business Wireless Networks | UKBTS',
-    description: 'Professional WiFi installation and wireless network solutions for Somerset & Dorset businesses. Enterprise-grade WiFi 6, site surveys, and expert support.',
+    title: 'Business WiFi Installation Somerset & Dorset | WiFi 6 Experts | UKBTS',
+    description: 'Professional business WiFi installation across Somerset and Dorset. WiFi 6 access points, full site surveys, enterprise security and guest networks. Request a free survey.',
+    ogTitle: 'WiFi Installation – Somerset & Dorset | UKBTS',
+    ogDescription: 'Expert wireless network design and installation. WiFi 6, full coverage, enterprise security. Taunton, Yeovil, Bournemouth and beyond.',
     keywords: 'WiFi installation Somerset, wireless network Dorset, WiFi 6, business WiFi, site survey, access points, enterprise WiFi',
   },
-  '/phone-systems': {
-    title: 'Business Phone Systems Somerset & Dorset | VoIP PBX Solutions | UKBTS',
-    description: 'Business phone systems for Somerset & Dorset including 3CX and Yeastar. Cloud and on-premise VoIP PBX solutions with professional installation in Taunton, Yeovil, Bournemouth, and Weymouth.',
-    keywords: 'business phone systems Somerset, VoIP phone system Dorset, IP PBX, cloud phone system, 3CX Taunton, Yeastar Yeovil, phone system Bournemouth, PBX Weymouth',
+  '/management': {
+    title: 'Managed Telecoms Services Somerset & Dorset | 24/7 Monitoring & Support | UKBTS',
+    description: 'Managed telecoms services for Somerset and Dorset businesses. 24/7 monitoring, proactive support and maintenance from £150/month. Schedule a consultation today.',
+    ogTitle: 'Managed Telecoms Services – Somerset & Dorset | UKBTS',
+    ogDescription: 'Let UKBTS manage your telecoms infrastructure. 24/7 monitoring, rapid response, fixed monthly pricing. Serving Somerset & Dorset.',
+    keywords: 'managed telecoms, IT support Somerset, 24/7 support, telecoms management, proactive monitoring Dorset',
   },
   '/contact': {
-    title: 'Contact UKBTS | Somerset & Dorset Telecommunications',
-    description: 'Get in touch with UKBTS Telecommunications. Expert telecoms solutions for businesses across Somerset & Dorset.',
+    title: 'Contact UKBTS | Free Quote – Telecoms Somerset & Dorset | 0333 358 3976',
+    description: 'Contact UKBTS for a free telecoms consultation. Serving businesses across Somerset and Dorset with VoIP, PBX, broadband and leased lines. Call 0333 358 3976.',
+    ogTitle: 'Contact UKBTS | Somerset & Dorset Telecommunications',
+    ogDescription: 'Get in touch with UKBTS Telecommunications. Expert telecoms solutions for businesses across Somerset & Dorset.',
     keywords: 'contact UKBTS, Somerset telecoms, Dorset communications, get quote, telecoms consultation',
   },
 };
@@ -80,23 +100,30 @@ function buildPageHtml(route, appHtml) {
     <meta property="og:locale" content="en_GB" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="UKBTS Telecommunications" />
-    <meta property="og:title" content="${meta.title}" />
-    <meta property="og:description" content="${meta.description}" />
+    <meta property="og:title" content="${meta.ogTitle}" />
+    <meta property="og:description" content="${meta.ogDescription}" />
     <meta property="og:url" content="${fullUrl}" />
     <meta property="og:image" content="${OG_IMAGE}" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1000" />
     <meta property="og:image:height" content="544" />
-    <meta property="og:image:alt" content="${meta.title}" />
+    <meta property="og:image:alt" content="${meta.ogTitle}" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${meta.title}" />
-    <meta name="twitter:description" content="${meta.description}" />
+    <meta name="twitter:title" content="${meta.ogTitle}" />
+    <meta name="twitter:description" content="${meta.ogDescription}" />
     <meta name="twitter:image" content="${OG_IMAGE}" />`;
 
   let html = templateHtml;
 
-  // Replace <title> tag
-  html = html.replace(/<title>[^<]*<\/title>/, '');
+  // Strip all existing SEO meta tags so we don't get duplicates
+  html = html.replace(/<title>[^<]*<\/title>/g, '');
+  html = html.replace(/<meta\s+name="description"[^>]*>/gi, '');
+  html = html.replace(/<meta\s+name="keywords"[^>]*>/gi, '');
+  html = html.replace(/<meta\s+name="robots"[^>]*>/gi, '');
+  html = html.replace(/<link\s+rel="canonical"[^>]*>/gi, '');
+  html = html.replace(/<meta\s+property="og:[^"]*"[^>]*>/gi, '');
+  html = html.replace(/<meta\s+name="twitter:[^"]*"[^>]*>/gi, '');
+
   // Inject all meta tags before </head>
   html = html.replace('</head>', `    ${metaTags}\n  </head>`);
   // Inject rendered app HTML into root div

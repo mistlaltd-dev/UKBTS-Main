@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const baseUrl = 'https://www.ukbts.co.uk';
+const baseUrl = 'https://ukbts.co.uk';
 
 const organizationSchema = {
   "@context": "https://schema.org",
