@@ -115,32 +115,17 @@ function buildPageHtml(route, appHtml) {
 
   let html = templateHtml;
 
-  // Strip static (non-data-rh) SEO tags from the template so page-specific
-  // ones injected below are the only copy. data-rh tags are added client-side
-  // after hydration and are not present in the static template.
-  html = html.replace(/<title>(?!.*data-rh)[^<]*<\/title>/g, '');
-  html = html.replace(/<meta\s+name="description"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+name="keywords"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+name="robots"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<link\s+rel="canonical"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+property="og:title"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+property="og:description"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+property="og:url"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+property="og:image:alt"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+property="og:locale"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+property="og:type"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+property="og:site_name"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+property="og:image"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+property="og:image:type"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+property="og:image:width"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+property="og:image:height"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+name="twitter:card"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+name="twitter:title"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+name="twitter:description"(?![^>]*data-rh)[^>]*\/?>/gi, '');
-  html = html.replace(/<meta\s+name="twitter:image"(?![^>]*data-rh)[^>]*\/?>/gi, '');
+  // Remove everything between the SEO comments in the template
+  html = html.replace(
+    /<!-- SEO meta tags are injected per-page by the build script -->[\s\S]*?<!-- Sitemap -->/,
+    '<!-- SEO meta tags are injected per-page by the build script -->\n    <!-- Sitemap -->'
+  );
 
-  // Strip data-rh tags from SSR output — static injection above is the source of truth
-  const cleanAppHtml = appHtml.replace(/<[^>]+data-rh="true"[^>]*\/?>/g, '');
+  // Strip data-rh tags from SSR output — static injection below is the source of truth
+  const cleanAppHtml = appHtml
+    .replace(/<script[^>]+data-rh="true"[^>]*>[\s\S]*?<\/script>/gi, '')
+    .replace(/<link[^>]+data-rh="true"[^>]*>/gi, '')
+    .replace(/<meta[^>]+data-rh="true"[^>]*\/?>/gi, '');
 
   // Inject all meta tags before </head>
   html = html.replace('</head>', `    ${metaTags}\n  </head>`);
