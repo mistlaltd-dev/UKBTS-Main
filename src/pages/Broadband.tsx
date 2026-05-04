@@ -1,4 +1,4 @@
-import { Wifi, CheckCircle, ArrowRight, Zap, Shield, HeadphonesIcon } from 'lucide-react';
+import { Wifi, CheckCircle, ArrowRight, Zap, Shield, Headphones as HeadphonesIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
@@ -15,6 +15,7 @@ export default function Broadband() {
         '99.9% uptime guarantee',
       ],
       ideal: 'Small businesses & offices',
+      link: '/contact',
     },
     {
       name: 'FTTP Business',
@@ -28,6 +29,7 @@ export default function Broadband() {
       ],
       ideal: 'Growing businesses',
       popular: true,
+      link: '/contact',
     },
     {
       name: 'Dedicated Leased Line',
@@ -40,6 +42,7 @@ export default function Broadband() {
         '99.99% uptime SLA',
       ],
       ideal: 'Enterprise & mission-critical',
+      link: '/leased-lines',
     },
   ];
 
@@ -75,8 +78,8 @@ export default function Broadband() {
   return (
     <div>
       <SEO
-        title="Business Broadband Somerset & Dorset | FTTC & FTTP | UKBTS"
-        description="High-speed business broadband for Somerset & Dorset. FTTC and FTTP connections with dedicated support and competitive pricing."
+        title="Business Broadband Somerset & Dorset | FTTC, FTTP & Leased Lines | UKBTS"
+        description="Business broadband for Somerset and Dorset. FTTC up to 80Mbps, FTTP up to 1Gbps, and dedicated leased lines. Static IP included, 99.9% uptime SLA. Check availability."
         keywords="business broadband Somerset, FTTC Dorset, FTTP Somerset, fibre broadband, dedicated internet, business internet"
         canonicalUrl="/broadband"
       />
@@ -180,7 +183,7 @@ export default function Broadband() {
                   Ideal for: {pkg.ideal}
                 </div>
                 <Link
-                  to="/contact"
+                  to={pkg.link}
                   className={`w-full py-3 rounded-lg font-semibold transition-colors ${
                     pkg.popular
                       ? 'bg-white text-cyan-600 hover:bg-gray-100'
@@ -279,6 +282,38 @@ export default function Broadband() {
                   <span className="text-cyan-400 font-bold text-xl">24/7</span>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Frequently Asked Questions
+            </h2>
+          </div>
+          <div className="space-y-6">
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">What is the difference between FTTC and FTTP broadband?</h3>
+              <p className="text-gray-600">FTTC (Fibre to the Cabinet) runs fibre to the street cabinet and then uses existing copper wiring to your premises, delivering speeds up to 80Mbps. FTTP (Fibre to the Premises) runs fibre all the way to your building, delivering speeds up to 1Gbps with more consistent performance. We'll check which options are available at your location.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Do I get a static IP address with business broadband?</h3>
+              <p className="text-gray-600">Yes. All our business broadband packages include at least one static IP address as standard. This is essential for hosting, VPNs and remote access solutions. Additional static IPs are available on FTTP and leased line products.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">What happens if my broadband goes down?</h3>
+              <p className="text-gray-600">All our business broadband products come with a priority fault repair SLA. We aim to respond within 4 hours and resolve faults within 24 hours. For mission-critical connectivity, we recommend our dedicated leased line products which carry a 99.99% uptime SLA.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Can I use business broadband for VoIP calls?</h3>
+              <p className="text-gray-600">Yes. Our business broadband products support VoIP with QoS configuration to prioritise call traffic. For higher call volumes we recommend FTTP or a leased line to ensure consistent call quality across all channels.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">How long does installation take?</h3>
+              <p className="text-gray-600">FTTC connections are typically activated within 5–10 working days. FTTP installations may take 2–4 weeks depending on whether full-fibre infrastructure is already present at your premises. We'll confirm timescales after checking availability at your location.</p>
             </div>
           </div>
         </div>

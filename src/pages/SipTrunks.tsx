@@ -72,8 +72,8 @@ export default function SipTrunks() {
   return (
     <div>
       <SEO
-        title="SIP Trunks Somerset & Dorset | VoIP Solutions | UKBTS"
-        description="Professional SIP trunk solutions for businesses in Somerset & Dorset. Cost-effective VoIP telephony with reliable call quality and scalability."
+        title="SIP Trunks Somerset & Dorset | Replace ISDN – Save Up to 60% | UKBTS"
+        description="Cost-effective SIP trunks for Somerset and Dorset businesses. Replace expensive ISDN lines with flexible VoIP. Instant deployment, keep your existing numbers. Get a quote."
         keywords="SIP trunks Somerset, VoIP trunks Dorset, business VoIP, SIP providers UK, cost-effective telephony, cloud telephony"
         canonicalUrl="/sip-trunks"
       />

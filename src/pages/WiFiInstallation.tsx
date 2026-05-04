@@ -1,4 +1,4 @@
-import { Wifi, CheckCircle, ArrowRight, Radio, Shield, HeadphonesIcon, Network, Gauge, Lock } from 'lucide-react';
+import { Wifi, CheckCircle, ArrowRight, Radio, Shield, Headphones as HeadphonesIcon, Network, Gauge, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
@@ -93,8 +93,8 @@ export default function WiFiInstallation() {
   return (
     <div>
       <SEO
-        title="WiFi Installation Somerset & Dorset | Business Wireless Networks | UKBTS"
-        description="Professional WiFi installation and wireless network solutions for Somerset & Dorset businesses. Enterprise-grade WiFi 6, site surveys, and expert support."
+        title="Business WiFi Installation Somerset & Dorset | WiFi 6 Experts | UKBTS"
+        description="Professional business WiFi installation across Somerset and Dorset. WiFi 6 access points, full site surveys, enterprise security and guest networks. Request a free survey."
         keywords="WiFi installation Somerset, wireless network Dorset, WiFi 6, business WiFi, site survey, access points, enterprise WiFi"
         canonicalUrl="/wifi-installation"
       />
@@ -351,6 +351,38 @@ export default function WiFiInstallation() {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Frequently Asked Questions
+            </h2>
+          </div>
+          <div className="space-y-6">
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Do I need a site survey before WiFi installation?</h3>
+              <p className="text-gray-600">Yes — we always carry out a site survey before designing your wireless network. This lets us assess the building layout, identify potential interference sources, and produce a coverage heat map so you know exactly where access points will be placed before any work begins.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">What is WiFi 6 and do I need it?</h3>
+              <p className="text-gray-600">WiFi 6 (802.11ax) is the latest wireless standard, delivering speeds up to 9.6Gbps with significantly better performance in environments with many connected devices. We recommend WiFi 6 for most business installations as it future-proofs your network and handles high device density — such as open plan offices, warehouses and hospitality venues — far more effectively than older standards.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Can you install WiFi in a warehouse or large open space?</h3>
+              <p className="text-gray-600">Yes. We regularly install wireless networks in warehouses, manufacturing facilities and large open spaces across Somerset and Dorset. We use industrial-grade access points designed for challenging environments, and our site survey accounts for ceiling height, racking, machinery and other factors that affect signal propagation.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">How do you keep the guest WiFi separate from our business network?</h3>
+              <p className="text-gray-600">We use VLAN segmentation and separate SSIDs to ensure guest traffic is completely isolated from your internal business network. Guest networks can also be configured with captive portals, bandwidth limits and access time restrictions.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">What ongoing support do you provide after installation?</h3>
+              <p className="text-gray-600">All installations include a full handover and staff briefing. We offer remote monitoring and support packages to keep your wireless network running optimally — contact us to discuss ongoing support options for your business.</p>
             </div>
           </div>
         </div>

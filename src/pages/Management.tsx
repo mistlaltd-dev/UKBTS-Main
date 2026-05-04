@@ -1,4 +1,4 @@
-import { Settings, CheckCircle, ArrowRight, Monitor, HeadphonesIcon, Shield } from 'lucide-react';
+import { Settings, CheckCircle, ArrowRight, Monitor, Headphones as HeadphonesIcon, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
@@ -66,8 +66,8 @@ export default function Management() {
   return (
     <div>
       <SEO
-        title="Managed Telecoms Services Somerset & Dorset | 24/7 Support | UKBTS"
-        description="Comprehensive managed telecoms services in Somerset & Dorset. 24/7 support, proactive monitoring, and expert consultation."
+        title="Managed Telecoms Services Somerset & Dorset | 24/7 Monitoring & Support | UKBTS"
+        description="Managed telecoms services for Somerset and Dorset businesses. 24/7 monitoring, proactive support and maintenance from £150/month. Schedule a consultation today."
         keywords="managed telecoms, IT support Somerset, 24/7 support, telecoms management, proactive monitoring Dorset"
         canonicalUrl="/management"
       />
@@ -267,6 +267,38 @@ export default function Management() {
                   <div className="text-gray-300">Years managing Somerset & Dorset businesses</div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Frequently Asked Questions
+            </h2>
+          </div>
+          <div className="space-y-6">
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">What does a managed telecoms service include?</h3>
+              <p className="text-gray-600">Our managed service covers proactive 24/7 monitoring of your telecoms infrastructure, regular firmware updates, configuration backups, security patches and access to our helpdesk. The Professional and Enterprise tiers also include dedicated account management and quarterly review sessions.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Is there a minimum contract length?</h3>
+              <p className="text-gray-600">Managed service agreements are typically 12 months, giving us the time to optimise your systems and deliver measurable improvements. We can discuss shorter terms for specific projects — contact us to find out more.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">What is your response time for critical issues?</h3>
+              <p className="text-gray-600">Our average response time for critical issues is under 4 hours. The Professional tier includes 24/7 support access, and the Enterprise tier includes a custom SLA with agreed response and fix times tailored to your business requirements.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Can you manage systems that UKBTS didn't install?</h3>
+              <p className="text-gray-600">Yes. We can onboard and manage existing telecoms infrastructure regardless of who installed it, following an initial audit of your systems. We support 3CX, Yeastar and most major VoIP and broadband platforms.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">How is the monthly fee structured?</h3>
+              <p className="text-gray-600">We offer three fixed-price tiers starting from £150/month for the Essential package. There are no hidden call-out fees for remote support within your package. On-site visits are included in the Enterprise tier and available as an add-on for Essential and Professional customers.</p>
             </div>
           </div>
         </div>

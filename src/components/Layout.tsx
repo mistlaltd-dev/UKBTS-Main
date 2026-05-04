@@ -113,7 +113,7 @@ export default function Layout({ children }: LayoutProps) {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <Link to="/" className="flex-shrink-0">
-              <img src="/Copy of UKBTS LOGO NEW (1).png" alt="UKBTS Telecommunications" className="h-12" />
+              <img src="/ukbts-logo.png" alt="UKBTS Telecommunications" className="h-12" />
             </Link>
 
             <div className="hidden lg:flex items-center space-x-1">
@@ -386,7 +386,7 @@ export default function Layout({ children }: LayoutProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
-              <img src="/copy_of_ukbts_icon_new.png" alt="UKBTS" className="h-12 mb-4" />
+              <img src="/ukbts-icon.png" alt="UKBTS Telecommunications – Somerset & Dorset" className="h-12 mb-4" />
               <p className="text-gray-400 text-sm mb-4">
                 Leading telecommunications provider for Somerset & Dorset businesses
               </p>
@@ -439,8 +439,6 @@ export default function Layout({ children }: LayoutProps) {
               <ul className="space-y-2 text-sm text-gray-400">
                 <li><Link to="/" className="hover:text-cyan-400 transition-colors">About Us</Link></li>
                 <li><Link to="/contact" className="hover:text-cyan-400 transition-colors">Contact</Link></li>
-                <li><a href="#" className="hover:text-cyan-400 transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-cyan-400 transition-colors">Terms & Conditions</a></li>
               </ul>
             </div>
           </div>

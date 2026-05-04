@@ -93,8 +93,8 @@ export default function ThreeCX() {
   return (
     <div>
       <SEO
-        title="3CX PBX Systems Somerset & Dorset | Certified Partner | UKBTS"
-        description="Official 3CX certified partner providing advanced PBX phone systems for businesses in Somerset & Dorset. Professional installation and support."
+        title="3CX PBX Somerset & Dorset | Certified 3CX Partner | Installation & Support | UKBTS"
+        description="Certified 3CX partner supplying, installing and supporting 3CX phone systems across Somerset and Dorset. Cloud, on-premise and hybrid deployment. Book a free demo."
         keywords="3CX Somerset, 3CX Dorset, PBX systems, IP phone system, 3CX certified partner, business phone system"
         canonicalUrl="/3cx"
       />
@@ -363,6 +363,38 @@ export default function ThreeCX() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Frequently Asked Questions
+            </h2>
+          </div>
+          <div className="space-y-6">
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">What is 3CX and how does it work?</h3>
+              <p className="text-gray-600">3CX is a software-based phone system (PBX) that runs on Windows, Linux or in the cloud. It delivers calls over your internet connection using VoIP, replacing traditional phone lines and hardware PBX systems. It includes a full unified communications suite covering voice, video, live chat and mobile apps — all managed from a single web-based console.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Is 3CX suitable for small businesses?</h3>
+              <p className="text-gray-600">Yes. 3CX offers a free tier for up to 10 users, making it accessible for startups and small businesses. As you grow, you can upgrade to paid tiers without changing your system. UKBTS can help you start small and scale your 3CX deployment as your team expands.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Can 3CX work with our existing phones?</h3>
+              <p className="text-gray-600">3CX is compatible with a wide range of SIP-based IP phones from manufacturers including Yealink, Fanvil, Snom and Polycom. If you have existing compatible hardware, we can integrate it. We'll assess your current equipment during consultation and advise on compatibility.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">What is the difference between cloud-hosted and on-premise 3CX?</h3>
+              <p className="text-gray-600">Cloud-hosted 3CX is managed on a server we or 3CX maintain — there is no on-site hardware to look after and updates are handled automatically. On-premise means the 3CX server is installed at your location, giving you full control and no ongoing hosting dependency. Hybrid options also exist for businesses with specific requirements.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">How long does 3CX installation take?</h3>
+              <p className="text-gray-600">A cloud-hosted 3CX system can typically be provisioned and configured within 1–3 days. On-premise installations may take slightly longer depending on server preparation and the number of users to configure. We handle all installation, configuration and user setup as part of our service.</p>
             </div>
           </div>
         </div>

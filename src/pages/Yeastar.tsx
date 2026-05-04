@@ -9,6 +9,8 @@ export default function Yeastar() {
       users: 'Up to 500',
       features: ['Ideal for SMBs', 'Built-in VoIP gateway', 'Expandable modules', 'Cloud management'],
       use: 'Small to medium businesses',
+      cta: 'Get a Quote for S-Series',
+      description: 'The Yeastar S-Series is ideal for growing SMBs in Somerset and Dorset that need a reliable on-premise PBX without heavy IT overhead. Its built-in VoIP gateway connects directly to SIP trunks, and modular expansion lets you add capacity as your team grows.',
     },
     {
       name: 'P-Series',
@@ -16,12 +18,16 @@ export default function Yeastar() {
       features: ['Enterprise-grade', 'High availability', 'Advanced routing', 'Multi-tenant support'],
       use: 'Large enterprises',
       popular: true,
+      cta: 'Get a Quote for P-Series',
+      description: 'The P-Series is Yeastar\'s enterprise platform, offering unified communications including video conferencing, CRM integration and advanced call analytics. High availability failover makes it suitable for businesses where downtime is not an option.',
     },
     {
       name: 'Cloud PBX',
       users: 'Unlimited',
       features: ['Fully cloud-hosted', 'Global deployment', 'Auto-scaling', 'Zero maintenance'],
       use: 'Multi-site organizations',
+      cta: 'Get a Quote for Cloud PBX',
+      description: 'For multi-site or fully remote businesses, Yeastar Cloud PBX removes all hardware dependency. Calls route over your internet connection and the system scales automatically — ideal for seasonal businesses or organisations with variable headcounts.',
     },
   ];
 
@@ -30,24 +36,27 @@ export default function Yeastar() {
       icon: Building,
       name: 'Hospitality',
       description: 'PMS integration, wake-up calls, room status management',
+      cta: 'Get a Hospitality PBX Quote',
     },
     {
       icon: Factory,
       name: 'Manufacturing',
       description: 'Paging systems, emergency broadcasts, loud environments',
+      cta: 'Get a Manufacturing PBX Quote',
     },
     {
       icon: Heart,
       name: 'Healthcare',
       description: 'HIPAA compliance, secure communications, patient privacy',
+      cta: 'Get a Healthcare PBX Quote',
     },
   ];
 
   return (
     <div>
       <SEO
-        title="Yeastar PBX Somerset & Dorset | Authorized Partner | UKBTS"
-        description="Authorized Yeastar PBX partner in Somerset & Dorset. Scalable IP phone systems with advanced features for growing businesses."
+        title="Yeastar PBX Somerset & Dorset | Authorised Partner | S-Series & P-Series | UKBTS"
+        description="Authorised Yeastar partner supplying S-Series, P-Series and Cloud PBX systems across Somerset and Dorset. Industry solutions for hospitality, healthcare and manufacturing. Get a quote."
         keywords="Yeastar Somerset, Yeastar PBX, IP PBX systems, Yeastar dealer, business phone system Dorset"
         canonicalUrl="/yeastar"
       />
@@ -56,7 +65,7 @@ export default function Yeastar() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="inline-block mb-4 px-4 py-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full">
-                <span className="text-cyan-400 text-sm font-medium">Authorized Yeastar Partner</span>
+                <span className="text-cyan-400 text-sm font-medium">Authorised Yeastar Partner</span>
               </div>
               <h1 className="text-4xl lg:text-5xl font-bold mb-6">
                 Yeastar PBX Solutions for Somerset & Dorset
@@ -147,18 +156,21 @@ export default function Yeastar() {
                     </div>
                   ))}
                 </div>
-                <div className={`text-sm mb-6 ${model.popular ? 'text-white/90' : 'text-gray-600'}`}>
+                <div className={`text-sm mb-4 ${model.popular ? 'text-white/90' : 'text-gray-600'}`}>
                   {model.use}
                 </div>
+                <p className={`text-sm mb-6 leading-relaxed ${model.popular ? 'text-white/80' : 'text-gray-600'}`}>
+                  {model.description}
+                </p>
                 <Link
-    to="/contact"
+                  to="/contact"
                   className={`w-full py-3 rounded-lg font-semibold transition-colors ${
                     model.popular
                       ? 'bg-white text-cyan-600 hover:bg-gray-100'
                       : 'bg-cyan-500 text-white hover:bg-cyan-600'
                   }`}
                 >
-                  Learn More
+                  {model.cta}
                 </Link>
               </div>
             ))}
@@ -186,10 +198,44 @@ export default function Yeastar() {
                     <Icon className="text-white" size={28} />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3">{industry.name}</h3>
-                  <p className="text-gray-600">{industry.description}</p>
+                  <p className="text-gray-600 mb-6">{industry.description}</p>
+                  <Link
+                    to="/contact"
+                    className="inline-block bg-cyan-500 text-white px-5 py-2.5 rounded-lg hover:bg-cyan-600 transition-colors font-semibold text-sm"
+                  >
+                    {industry.cta}
+                  </Link>
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Frequently Asked Questions
+            </h2>
+          </div>
+          <div className="space-y-6">
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">What is the difference between the Yeastar S-Series and P-Series?</h3>
+              <p className="text-gray-600">The S-Series is designed for small to medium businesses supporting up to 500 users, with a focus on simplicity and value. The P-Series is an enterprise-grade platform supporting up to 2,000 users with advanced features including high availability, multi-tenancy and deeper CRM integrations.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">How much does a Yeastar PBX cost in the UK?</h3>
+              <p className="text-gray-600">Pricing depends on the number of users, deployment type and required features. Contact UKBTS for a tailored quote — we'll assess your requirements and recommend the most cost-effective solution for your business.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Can Yeastar integrate with Microsoft Teams or CRM systems?</h3>
+              <p className="text-gray-600">Yes. The Yeastar P-Series supports Microsoft Teams integration and connects with popular CRM platforms. The S-Series also supports a range of third-party integrations via API.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">What support is included with a Yeastar installation from UKBTS?</h3>
+              <p className="text-gray-600">All Yeastar installations include professional configuration, user training and ongoing support. Ask us about our managed service packages for 24/7 monitoring and proactive maintenance.</p>
+            </div>
           </div>
         </div>
       </section>

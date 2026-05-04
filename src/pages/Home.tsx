@@ -78,8 +78,8 @@ export default function Home() {
   return (
     <div>
       <SEO
-        title="UKBTS Telecommunications - VoIP, Broadband & PBX Provider | Somerset & Dorset"
-        description="Leading VoIP, broadband, and PBX provider for Somerset & Dorset businesses. SIP trunks, business broadband, 3CX, Yeastar, leased lines, and managed services."
+        title="UKBTS Telecommunications | VoIP, PBX & Broadband – Somerset & Dorset"
+        description="UKBTS provides business phone systems, SIP trunks, broadband, leased lines and WiFi installation across Somerset and Dorset. Get a free quote today."
         keywords="VoIP provider Somerset, business broadband Dorset, PBX systems, SIP trunks, telecommunications Somerset, 3CX partner, Yeastar dealer, leased lines"
         canonicalUrl="/"
       />

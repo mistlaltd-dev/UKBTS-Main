@@ -30,8 +30,8 @@ export default function LeasedLines() {
   return (
     <div>
       <SEO
-        title="Leased Lines Somerset & Dorset | Dedicated Connectivity | UKBTS"
-        description="Dedicated leased line connectivity for businesses in Somerset & Dorset. Guaranteed bandwidth with 24/7 monitoring and support."
+        title="Leased Lines Somerset & Dorset | 100Mbps–10Gbps Dedicated Connectivity | UKBTS"
+        description="Dedicated leased lines for Somerset and Dorset businesses. 100Mbps from £299/month, 1Gbps from £599/month. Guaranteed symmetric speeds, 99.9%+ uptime SLA. Request a survey."
         keywords="leased lines Somerset, dedicated connectivity Dorset, ethernet circuits, point to point, guaranteed bandwidth"
         canonicalUrl="/leased-lines"
       />
@@ -230,6 +230,38 @@ export default function LeasedLines() {
                   <span className="text-cyan-400 font-bold text-xl">24/7</span>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Frequently Asked Questions
+            </h2>
+          </div>
+          <div className="space-y-6">
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">What is the difference between a leased line and business broadband?</h3>
+              <p className="text-gray-600">A leased line is a dedicated, uncontended connection used solely by your business — meaning speeds are guaranteed and never shared with other users. Business broadband is a contended connection where bandwidth is shared across many customers, meaning speeds can vary at peak times. Leased lines also offer symmetric speeds, with identical upload and download rates.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">How long does leased line installation take in Somerset or Dorset?</h3>
+              <p className="text-gray-600">Installation lead times typically range from 30 to 90 days depending on your location and the work required by the carrier. We manage the entire process on your behalf, keeping you updated throughout. Rural locations in Somerset and Dorset may take longer due to infrastructure requirements.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">What speeds are available and what do they cost?</h3>
+              <p className="text-gray-600">We offer dedicated leased lines from 100Mbps (from £299/month) up to 10Gbps for enterprise requirements. All pricing includes a static IP allocation and our proactive monitoring service. Contact us for a site survey and tailored quote.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Can a leased line support VoIP and video conferencing?</h3>
+              <p className="text-gray-600">Yes — leased lines are ideal for VoIP and video conferencing due to their low latency and guaranteed bandwidth. Unlike broadband, there is no contention that could cause call quality issues during busy periods. We can also configure QoS (Quality of Service) to prioritise voice traffic.</p>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Is there a minimum contract length?</h3>
+              <p className="text-gray-600">Leased lines are typically available on 12, 24 or 36 month terms. Longer terms attract lower monthly pricing. We'll recommend the best term based on your business requirements and budget.</p>
             </div>
           </div>
         </div>

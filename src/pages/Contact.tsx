@@ -59,8 +59,8 @@ export default function Contact() {
   return (
     <div>
       <SEO
-        title="Contact UKBTS | Somerset & Dorset Telecommunications"
-        description="Get in touch with UKBTS Telecommunications. Expert telecoms solutions for businesses across Somerset & Dorset."
+        title="Contact UKBTS | Free Quote – Telecoms Somerset & Dorset | 0333 358 3976"
+        description="Contact UKBTS for a free telecoms consultation. Serving businesses across Somerset and Dorset with VoIP, PBX, broadband and leased lines. Call 0333 358 3976."
         keywords="contact UKBTS, Somerset telecoms, Dorset communications, get quote, telecoms consultation"
         canonicalUrl="/contact"
       />

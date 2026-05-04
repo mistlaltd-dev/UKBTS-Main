@@ -43,6 +43,7 @@ export default function PhoneSystems() {
         'Free mobile apps',
       ],
       link: '/3cx',
+      cta: 'Learn More About 3CX',
     },
     {
       title: 'Yeastar Phone System',
@@ -54,6 +55,7 @@ export default function PhoneSystems() {
         'Advanced reporting',
       ],
       link: '/yeastar',
+      cta: 'Learn More About Yeastar',
     },
   ];
 
@@ -97,8 +99,8 @@ export default function PhoneSystems() {
   return (
     <div>
       <SEO
-        title="Business Phone Systems Somerset & Dorset | VoIP PBX Solutions | UKBTS"
-        description="Business phone systems for Somerset & Dorset including 3CX and Yeastar. Cloud and on-premise VoIP PBX solutions with professional installation in Taunton, Yeovil, Bournemouth, and Weymouth."
+        title="Business Phone Systems Somerset & Dorset | 3CX & Yeastar PBX | UKBTS"
+        description="Modern VoIP business phone systems for Somerset and Dorset. UKBTS supply and install 3CX and Yeastar PBX systems with full support. Request a free consultation."
         keywords="business phone systems Somerset, VoIP phone system Dorset, IP PBX, cloud phone system, 3CX Taunton, Yeastar Yeovil, phone system Bournemouth, PBX Weymouth"
         canonicalUrl="/phone-systems"
       />
@@ -205,7 +207,7 @@ export default function PhoneSystems() {
                   to={system.link}
                   className="text-cyan-600 hover:text-cyan-700 font-semibold inline-flex items-center gap-2"
                 >
-                  Learn More <ArrowRight size={18} />
+                  {system.cta} <ArrowRight size={18} />
                 </Link>
               </div>
             ))}
