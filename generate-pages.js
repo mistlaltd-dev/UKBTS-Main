@@ -121,16 +121,18 @@ function buildPageHtml(route, appHtml) {
     '<!-- SEO meta tags are injected per-page by the build script -->\n    <!-- Sitemap -->'
   );
 
-  // Strip data-rh tags from SSR output — static injection below is the source of truth
-  const cleanAppHtml = appHtml
-    .replace(/<script[^>]+data-rh="true"[^>]*>[\s\S]*?<\/script>/gi, '')
-    .replace(/<link[^>]+data-rh="true"[^>]*>/gi, '')
-    .replace(/<meta[^>]+data-rh="true"[^>]*\/?>/gi, '');
+  const cleanAppHtml = appHtml;
 
   // Inject all meta tags before </head>
   html = html.replace('</head>', `    ${metaTags}\n  </head>`);
   // Inject rendered app HTML into root div
   html = html.replace('<div id="root"></div>', `<div id="root">${cleanAppHtml}</div>`);
+
+  // Final strip of any remaining data-rh tags from the complete HTML
+  html = html
+    .replace(/<script[^>]+data-rh="true"[^>]*>[\s\S]*?<\/script>/gi, '')
+    .replace(/<link[^>]+data-rh="true"[^>]*\/?>/gi, '')
+    .replace(/<meta[^>]+data-rh="true"[^>]*\/?>/gi, '');
 
   return html;
 }
