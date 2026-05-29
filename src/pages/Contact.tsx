@@ -1,68 +1,60 @@
-import { Phone, Mail, MapPin, Clock } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
+import { useState } from 'react';
 import SEO from '../components/SEO';
 
-function HaloTicketForm() {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  useEffect(() => {
-    const handleMessage = (e: MessageEvent) => {
-      if (e.data?.type === 'halo-form-height' && iframeRef.current) {
-        iframeRef.current.style.height = `${e.data.height}px`;
-      }
-    };
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, []);
-
-  const html = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="https://hsp.ukbts.co.uk/embed/newticket.css" />
-        <style>
-          html, body { margin: 0; padding: 0; background: transparent; overflow: hidden; }
-        </style>
-      </head>
-      <body>
-        <div id="halo-form"></div>
-        <script>
-          var haloFormConfig = {
-            haloApiUrl: "https://hsp.ukbts.co.uk/api",
-            ticketTypeId: 29,
-            ticketTypeKey: "981fedbe-e746-4827-89ac-e9a95510d853",
-          };
-        </script>
-        <script src="https://hsp.ukbts.co.uk/embed/newticket.js"></script>
-        <script>
-          function sendHeight() {
-            var height = document.body.scrollHeight;
-            window.parent.postMessage({ type: 'halo-form-height', height: height }, '*');
-          }
-          var observer = new MutationObserver(sendHeight);
-          observer.observe(document.body, { childList: true, subtree: true, attributes: true });
-          window.addEventListener('load', function() {
-            setTimeout(sendHeight, 500);
-            setTimeout(sendHeight, 1500);
-            setTimeout(sendHeight, 3000);
-          });
-        </script>
-      </body>
-    </html>
-  `;
-  return (
-    <iframe
-      ref={iframeRef}
-      srcDoc={html}
-      style={{ border: 'none', width: '100%', minHeight: '800px', background: 'transparent' }}
-      title="Support Ticket"
-    />
-  );
-}
-
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    service: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`;
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        service: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
     <div>
@@ -178,8 +170,134 @@ export default function Contact() {
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
-              <HaloTicketForm />
+              <div className="bg-gray-50 rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                      Your Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                        Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                        Phone Number *
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        required
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                      Company Name
+                    </label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
+                      Service Interest *
+                    </label>
+                    <select
+                      id="service"
+                      name="service"
+                      required
+                      value={formData.service}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                    >
+                      <option value="">Please select...</option>
+                      <option value="sip-trunks">SIP Trunks</option>
+                      <option value="broadband">Business Broadband</option>
+                      <option value="3cx">3CX PBX</option>
+                      <option value="yeastar">Yeastar PBX</option>
+                      <option value="leased-lines">Leased Lines</option>
+                      <option value="management">Management Services</option>
+                      <option value="general">General Enquiry</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                      Your Message *
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={5}
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  {submitStatus === 'success' && (
+                    <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg">
+                      Thank you for your enquiry! We will be in touch shortly.
+                    </div>
+                  )}
+
+                  {submitStatus === 'error' && (
+                    <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg">
+                      Sorry, there was an error sending your message. Please try again or call us directly.
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-cyan-500 text-white px-8 py-4 rounded-lg hover:bg-cyan-600 transition-colors font-semibold text-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message'} <Send size={20} />
+                  </button>
+
+                  <p className="text-xs text-gray-600">
+                    By submitting this form, you agree to our privacy policy. We will only use your
+                    information to respond to your enquiry.
+                  </p>
+                </form>
+              </div>
             </div>
           </div>
         </div>
