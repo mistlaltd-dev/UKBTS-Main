@@ -6,7 +6,12 @@ function HaloTicketForm() {
     <!DOCTYPE html>
     <html>
       <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="https://hsp.ukbts.co.uk/embed/newticket.css" />
+      </head>
+      <body style="margin:0;padding:0;">
+        <div id="halo-form"></div>
         <script>
           var haloFormConfig = {
             haloApiUrl: "https://hsp.ukbts.co.uk/api",
@@ -15,15 +20,13 @@ function HaloTicketForm() {
           };
         </script>
         <script src="https://hsp.ukbts.co.uk/embed/newticket.js"></script>
-      </head>
-      <body style="margin:0;padding:0;">
-        <div id="halo-form"></div>
       </body>
     </html>
   `;
   return (
     <iframe
       srcDoc={html}
+      sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
       style={{ border: 'none', width: '100%', height: '600px' }}
       title="Support Ticket"
     />
