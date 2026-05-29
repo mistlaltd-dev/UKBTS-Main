@@ -1,7 +1,20 @@
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 import SEO from '../components/SEO';
 
 function HaloTicketForm() {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      if (e.data?.type === 'halo-form-height' && iframeRef.current) {
+        iframeRef.current.style.height = `${e.data.height}px`;
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
   const html = `
     <!DOCTYPE html>
     <html>
@@ -9,8 +22,11 @@ function HaloTicketForm() {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="https://hsp.ukbts.co.uk/embed/newticket.css" />
+        <style>
+          html, body { margin: 0; padding: 0; background: transparent; overflow: hidden; }
+        </style>
       </head>
-      <body style="margin:0;padding:0;">
+      <body>
         <div id="halo-form"></div>
         <script>
           var haloFormConfig = {
@@ -20,14 +36,28 @@ function HaloTicketForm() {
           };
         </script>
         <script src="https://hsp.ukbts.co.uk/embed/newticket.js"></script>
+        <script>
+          function sendHeight() {
+            var height = document.body.scrollHeight;
+            window.parent.postMessage({ type: 'halo-form-height', height: height }, '*');
+          }
+          var observer = new MutationObserver(sendHeight);
+          observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+          window.addEventListener('load', function() {
+            setTimeout(sendHeight, 500);
+            setTimeout(sendHeight, 1500);
+            setTimeout(sendHeight, 3000);
+          });
+        </script>
       </body>
     </html>
   `;
   return (
     <iframe
+      ref={iframeRef}
       srcDoc={html}
       sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-      style={{ border: 'none', width: '100%', height: '600px' }}
+      style={{ border: 'none', width: '100%', minHeight: '800px', background: 'transparent' }}
       title="Support Ticket"
     />
   );
@@ -149,10 +179,8 @@ export default function Contact() {
             </div>
 
             <div>
-              <div className="bg-gray-50 rounded-2xl p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
-                <HaloTicketForm />
-              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+              <HaloTicketForm />
             </div>
           </div>
         </div>
