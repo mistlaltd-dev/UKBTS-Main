@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "supabase": {
-      "url": "https://mcp.supabase.com/mcp?project=YOUR_PROJECT_REF",
+      "url": "https://mcp.supabase.com/mcp?project=ezmkluewpflgvssbmagj",
       "description": "Supabase MCP Server - connect to your Supabase projects"
     }
   }
