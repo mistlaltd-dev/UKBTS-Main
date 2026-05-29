@@ -1,8 +1,30 @@
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { useEffect } from 'react';
 import SEO from '../components/SEO';
-import HaloTicketForm from '../components/HaloTicketForm';
 
 export default function Contact() {
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://hsp.ukbts.co.uk/embed/newticket.css';
+    document.head.appendChild(link);
+
+    (window as any).haloFormConfig = {
+      haloApiUrl: 'https://hsp.ukbts.co.uk/api',
+      ticketTypeId: 29,
+      ticketTypeKey: '981fedbe-e746-4827-89ac-e9a95510d853',
+    };
+
+    const script = document.createElement('script');
+    script.src = 'https://hsp.ukbts.co.uk/embed/newticket.js';
+    document.body.appendChild(script);
+
+    return () => {
+      document.head.removeChild(link);
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div>
       <SEO
@@ -119,7 +141,7 @@ export default function Contact() {
             <div>
               <div className="bg-gray-50 rounded-2xl p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
-                <HaloTicketForm />
+                <div id="halo-form" />
               </div>
             </div>
           </div>
