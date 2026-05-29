@@ -56,7 +56,6 @@ function HaloTicketForm() {
     <iframe
       ref={iframeRef}
       srcDoc={html}
-      sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
       style={{ border: 'none', width: '100%', minHeight: '800px', background: 'transparent' }}
       title="Support Ticket"
     />
