@@ -26,9 +26,12 @@ const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
 const FUNCTION_URL = `${SUPABASE_URL}/functions/v1/speed-test`;
 
-const DOWNLOAD_BYTES = 25 * 1024 * 1024;
-const UPLOAD_BYTES = 8 * 1024 * 1024;
+const DOWNLOAD_BYTES_PER_STREAM = 25 * 1024 * 1024;
+const UPLOAD_BYTES_PER_STREAM = 8 * 1024 * 1024;
+const PARALLEL_STREAMS = 6;
 const PING_SAMPLES = 6;
+const TEST_WARMUP_MS = 1500;
+const TEST_DURATION_MS = 8000;
 
 const GAUGE_MAX_MBPS = 1000;
 
@@ -92,69 +95,170 @@ export default function SpeedTest() {
   }
 
   async function measureDownload(): Promise<number> {
-    const url = `${FUNCTION_URL}?action=download&bytes=${DOWNLOAD_BYTES}&n=${Date.now()}`;
     const start = performance.now();
-    const res = await fetch(url, {
-      method: 'GET',
-      headers: authHeaders(),
-      cache: 'no-store',
-    });
-    if (!res.ok || !res.body) throw new Error('Download failed');
+    const totalBytes = { value: 0 };
+    const stopped = { value: false };
+    const controllers: AbortController[] = [];
 
-    const reader = res.body.getReader();
-    let received = 0;
-    let lastTick = start;
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      if (value) {
-        received += value.byteLength;
-        const now = performance.now();
-        if (now - lastTick > 100) {
-          const elapsedSec = (now - start) / 1000;
-          const mbps = (received * 8) / 1_000_000 / elapsedSec;
-          setLiveSpeed(mbps);
-          setProgress(Math.min(1, received / DOWNLOAD_BYTES));
-          lastTick = now;
+    const launchStream = async (streamIndex: number): Promise<void> => {
+      while (!stopped.value && !cancelledRef.current) {
+        const controller = new AbortController();
+        controllers.push(controller);
+        const url = `${FUNCTION_URL}?action=download&bytes=${DOWNLOAD_BYTES_PER_STREAM}&n=${streamIndex}-${Date.now()}-${Math.random()}`;
+        try {
+          const res = await fetch(url, {
+            method: 'GET',
+            headers: authHeaders(),
+            cache: 'no-store',
+            signal: controller.signal,
+          });
+          if (!res.ok || !res.body) {
+            if (stopped.value) return;
+            throw new Error('Download failed');
+          }
+          const reader = res.body.getReader();
+          while (true) {
+            if (stopped.value || cancelledRef.current) {
+              try { controller.abort(); } catch (_e) { /* ignore */ }
+              try { reader.cancel(); } catch (_e) { /* ignore */ }
+              return;
+            }
+            const { done, value } = await reader.read();
+            if (done) break;
+            if (value) totalBytes.value += value.byteLength;
+          }
+        } catch (err) {
+          if (stopped.value || cancelledRef.current) return;
+          if (err instanceof Error && err.name === 'AbortError') return;
         }
       }
-    }
+    };
 
-    const elapsedSec = (performance.now() - start) / 1000;
-    return (received * 8) / 1_000_000 / elapsedSec;
+    const streamPromises = Array.from({ length: PARALLEL_STREAMS }, (_, i) => launchStream(i));
+
+    const samples: { t: number; bytes: number }[] = [];
+    let lastUiUpdate = 0;
+    const ticker = window.setInterval(() => {
+      const now = performance.now();
+      const elapsed = now - start;
+      samples.push({ t: elapsed, bytes: totalBytes.value });
+      if (now - lastUiUpdate > 150) {
+        lastUiUpdate = now;
+        const recentWindow = 1500;
+        const cutoff = elapsed - recentWindow;
+        const earlier = samples.find((s) => s.t >= cutoff);
+        if (earlier && elapsed > earlier.t) {
+          const deltaBytes = totalBytes.value - earlier.bytes;
+          const deltaSec = (elapsed - earlier.t) / 1000;
+          const mbps = (deltaBytes * 8) / 1_000_000 / deltaSec;
+          setLiveSpeed(mbps);
+        } else if (elapsed > 0) {
+          setLiveSpeed((totalBytes.value * 8) / 1_000_000 / (elapsed / 1000));
+        }
+        setProgress(Math.min(1, elapsed / TEST_DURATION_MS));
+      }
+    }, 100);
+
+    await new Promise((resolve) => setTimeout(resolve, TEST_DURATION_MS));
+    stopped.value = true;
+    controllers.forEach((c) => { try { c.abort(); } catch (_e) { /* ignore */ } });
+    window.clearInterval(ticker);
+    await Promise.allSettled(streamPromises);
+
+    const measureWindow = samples.filter((s) => s.t >= TEST_WARMUP_MS);
+    if (measureWindow.length < 2) {
+      const totalElapsed = (performance.now() - start) / 1000;
+      return (totalBytes.value * 8) / 1_000_000 / totalElapsed;
+    }
+    const first = measureWindow[0];
+    const last = measureWindow[measureWindow.length - 1];
+    const deltaBytes = last.bytes - first.bytes;
+    const deltaSec = (last.t - first.t) / 1000;
+    return (deltaBytes * 8) / 1_000_000 / deltaSec;
   }
 
   async function measureUpload(): Promise<number> {
-    const payload = new Uint8Array(UPLOAD_BYTES);
-    crypto.getRandomValues(payload.subarray(0, Math.min(UPLOAD_BYTES, 65536)));
-
-    const url = `${FUNCTION_URL}?action=upload&n=${Date.now()}`;
-    const start = performance.now();
-
-    const tickInterval = window.setInterval(() => {
-      const elapsed = (performance.now() - start) / 1000;
-      const estimatedBytes = Math.min(UPLOAD_BYTES, UPLOAD_BYTES * Math.min(1, elapsed / 5));
-      const mbps = (estimatedBytes * 8) / 1_000_000 / Math.max(0.1, elapsed);
-      setLiveSpeed(mbps);
-      setProgress(Math.min(0.95, elapsed / 8));
-    }, 120);
-
-    try {
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: authHeaders({ 'Content-Type': 'application/octet-stream' }),
-        body: payload,
-      });
-      if (!res.ok) throw new Error('Upload failed');
-      await res.json();
-    } finally {
-      window.clearInterval(tickInterval);
+    const payload = new Uint8Array(UPLOAD_BYTES_PER_STREAM);
+    const fillLimit = 65536;
+    for (let offset = 0; offset < Math.min(UPLOAD_BYTES_PER_STREAM, fillLimit); offset += fillLimit) {
+      crypto.getRandomValues(payload.subarray(offset, Math.min(offset + fillLimit, UPLOAD_BYTES_PER_STREAM)));
     }
 
-    const elapsedSec = (performance.now() - start) / 1000;
+    const start = performance.now();
+    const completedBytes = { value: 0 };
+    const stopped = { value: false };
+    const controllers: AbortController[] = [];
+
+    const launchStream = async (streamIndex: number): Promise<void> => {
+      while (!stopped.value && !cancelledRef.current) {
+        const controller = new AbortController();
+        controllers.push(controller);
+        const url = `${FUNCTION_URL}?action=upload&n=${streamIndex}-${Date.now()}-${Math.random()}`;
+        const requestStart = performance.now();
+        try {
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: authHeaders({ 'Content-Type': 'application/octet-stream' }),
+            body: payload,
+            signal: controller.signal,
+          });
+          if (!stopped.value) {
+            if (!res.ok) throw new Error('Upload failed');
+            await res.json();
+          }
+          completedBytes.value += UPLOAD_BYTES_PER_STREAM;
+        } catch (err) {
+          if (stopped.value || cancelledRef.current) return;
+          if (err instanceof Error && err.name === 'AbortError') return;
+        } finally {
+          const requestSec = (performance.now() - requestStart) / 1000;
+          if (requestSec < 0.05) {
+            await new Promise((r) => setTimeout(r, 50));
+          }
+        }
+      }
+    };
+
+    const streamPromises = Array.from({ length: PARALLEL_STREAMS }, (_, i) => launchStream(i));
+
+    const samples: { t: number; bytes: number }[] = [];
+    let lastUiUpdate = 0;
+    const ticker = window.setInterval(() => {
+      const now = performance.now();
+      const elapsed = now - start;
+      samples.push({ t: elapsed, bytes: completedBytes.value });
+      if (now - lastUiUpdate > 150) {
+        lastUiUpdate = now;
+        const recentWindow = 2000;
+        const cutoff = elapsed - recentWindow;
+        const earlier = samples.find((s) => s.t >= cutoff);
+        if (earlier && elapsed > earlier.t) {
+          const deltaBytes = completedBytes.value - earlier.bytes;
+          const deltaSec = (elapsed - earlier.t) / 1000;
+          const mbps = (deltaBytes * 8) / 1_000_000 / deltaSec;
+          setLiveSpeed(mbps);
+        }
+        setProgress(Math.min(1, elapsed / TEST_DURATION_MS));
+      }
+    }, 100);
+
+    await new Promise((resolve) => setTimeout(resolve, TEST_DURATION_MS));
+    stopped.value = true;
+    controllers.forEach((c) => { try { c.abort(); } catch (_e) { /* ignore */ } });
+    window.clearInterval(ticker);
+    await Promise.allSettled(streamPromises);
+
     setProgress(1);
-    return (UPLOAD_BYTES * 8) / 1_000_000 / elapsedSec;
+    const measureWindow = samples.filter((s) => s.t >= TEST_WARMUP_MS);
+    if (measureWindow.length < 2) {
+      const totalElapsed = (performance.now() - start) / 1000;
+      return (completedBytes.value * 8) / 1_000_000 / totalElapsed;
+    }
+    const first = measureWindow[0];
+    const last = measureWindow[measureWindow.length - 1];
+    const deltaBytes = last.bytes - first.bytes;
+    const deltaSec = (last.t - first.t) / 1000;
+    return (deltaBytes * 8) / 1_000_000 / deltaSec;
   }
 
   async function runTest() {
@@ -367,12 +471,12 @@ export default function SpeedTest() {
               <Step
                 number="2"
                 title="Download"
-                body="Your browser pulls a 25MB stream from our infrastructure. We track real-time throughput as it arrives."
+                body="Six parallel streams pull data from our infrastructure for around 8 seconds. We saturate your line and measure the steady-state throughput, ignoring the TCP slow-start ramp-up."
               />
               <Step
                 number="3"
                 title="Upload"
-                body="Your browser pushes an 8MB payload back to our servers. We measure how quickly your line can send data outbound."
+                body="Six parallel streams push payloads back to our servers for around 8 seconds, again measuring the sustained outbound throughput once the connection is fully warmed up."
               />
             </div>
 
