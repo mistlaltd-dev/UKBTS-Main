@@ -13,6 +13,7 @@ import WiFiInstallation from './pages/WiFiInstallation';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import PhoneSystems from './pages/PhoneSystems';
+import NotFound from './pages/NotFound';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -49,6 +50,7 @@ export default function AppRoutes() {
             <Route path="/wifi-installation" element={<WiFiInstallation />} />
             <Route path="/phone-systems" element={<PhoneSystems />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
       )}

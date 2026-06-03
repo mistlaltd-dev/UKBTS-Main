@@ -78,6 +78,14 @@ const pageMetadata = {
     ogDescription: 'Get in touch with UKBTS Telecommunications. Expert telecoms solutions for businesses across Somerset & Dorset.',
     keywords: 'contact UKBTS, Somerset telecoms, Dorset communications, get quote, telecoms consultation',
   },
+  '/404': {
+    title: 'Page Not Found | UKBTS Telecommunications',
+    description: 'The page you are looking for could not be found. Browse our telecoms services or contact UKBTS for help.',
+    ogTitle: 'Page Not Found | UKBTS Telecommunications',
+    ogDescription: 'The page you are looking for could not be found. Browse our telecoms services or contact UKBTS for help.',
+    keywords: '404, page not found, UKBTS',
+    noIndex: true,
+  },
 };
 
 const routes = Object.keys(pageMetadata);
@@ -91,11 +99,14 @@ const templateHtml = fs.readFileSync(path.join(distDir, 'index.html'), 'utf-8');
 function buildPageHtml(route, appHtml) {
   const meta = pageMetadata[route];
   const fullUrl = route === '/' ? BASE_URL : `${BASE_URL}${route}`;
+  const robotsContent = meta.noIndex
+    ? 'noindex, nofollow'
+    : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
 
   const metaTags = `<title>${meta.title}</title>
     <meta name="description" content="${meta.description}" />
     <meta name="keywords" content="${meta.keywords}" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="robots" content="${robotsContent}" />
     <link rel="canonical" href="${fullUrl}" />
     <meta property="og:locale" content="en_GB" />
     <meta property="og:type" content="website" />
@@ -145,6 +156,9 @@ for (const route of routes) {
   if (route === '/') {
     fs.writeFileSync(path.join(distDir, 'index.html'), pageHtml);
     console.log(`Generated: index.html`);
+  } else if (route === '/404') {
+    fs.writeFileSync(path.join(distDir, '404.html'), pageHtml);
+    console.log(`Generated: 404.html`);
   } else {
     const routeDir = path.join(distDir, route);
     if (!fs.existsSync(routeDir)) {
@@ -155,9 +169,11 @@ for (const route of routes) {
   }
 }
 
-// Generate sitemap.xml
+// Generate sitemap.xml (exclude noindex pages)
 const lastmod = '2026-05-04';
-const sitemapEntries = routes.map(route => {
+const sitemapEntries = routes
+  .filter(route => !pageMetadata[route].noIndex)
+  .map(route => {
   const fullUrl = route === '/' ? BASE_URL : `${BASE_URL}${route}`;
   const priority = route === '/' ? '1.0' : '0.8';
   const changefreq = route === '/' ? 'weekly' : 'monthly';
