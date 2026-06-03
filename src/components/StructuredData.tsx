@@ -127,6 +127,19 @@ const serviceSchemas: Record<string, any> = {
       "name": "Somerset and Dorset"
     },
     "description": "Professional WiFi installation and wireless network solutions. Enterprise-grade WiFi 6, site surveys, and expert support."
+  },
+  '/speed-test': {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "UKBTS Broadband Speed Test",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "description": "Free anonymous broadband speed test from UKBTS. Measure download speed, upload speed, ping and jitter against UK infrastructure.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
+    "provider": {
+      "@type": "Organization",
+      "name": "UKBTS Telecommunications"
+    }
   }
 };
 
@@ -361,6 +374,24 @@ const breadcrumbSchemas: Record<string, any> = {
         "position": 2,
         "name": "WiFi Installation",
         "item": `${baseUrl}/wifi-installation`
+      }
+    ]
+  },
+  '/speed-test': {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": baseUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Broadband Speed Test",
+        "item": `${baseUrl}/speed-test`
       }
     ]
   }

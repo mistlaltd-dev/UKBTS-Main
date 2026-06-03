@@ -71,6 +71,13 @@ const pageMetadata = {
     ogDescription: 'Let UKBTS manage your telecoms infrastructure. 24/7 monitoring, rapid response, fixed monthly pricing. Serving Somerset & Dorset.',
     keywords: 'managed telecoms, IT support Somerset, 24/7 support, telecoms management, proactive monitoring Dorset',
   },
+  '/speed-test': {
+    title: 'Broadband Speed Test | Free Internet Speed Checker | UKBTS',
+    description: 'Free anonymous broadband speed test from UKBTS. Measure your download speed, upload speed, ping and jitter against UK infrastructure in seconds.',
+    ogTitle: 'Broadband Speed Test | UKBTS',
+    ogDescription: 'Check your real download, upload, ping and jitter against UKBTS infrastructure. No tracking, no sign-up.',
+    keywords: 'broadband speed test, internet speed test UK, business broadband test, download speed, upload speed, ping test, jitter test',
+  },
   '/contact': {
     title: 'Contact UKBTS | Free Quote – Telecoms Somerset & Dorset | 0333 358 3976',
     description: 'Contact UKBTS for a free telecoms consultation. Serving businesses across Somerset and Dorset with VoIP, PBX, broadband and leased lines. Call 0333 358 3976.',

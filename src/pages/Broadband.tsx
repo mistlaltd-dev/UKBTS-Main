@@ -1,4 +1,4 @@
-import { Wifi, CheckCircle, ArrowRight, Zap, Shield, Headphones as HeadphonesIcon } from 'lucide-react';
+import { Wifi, CheckCircle, ArrowRight, Zap, Shield, Headphones as HeadphonesIcon, Gauge } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
@@ -102,6 +102,12 @@ export default function Broadband() {
                 className="bg-cyan-500 text-white px-8 py-4 rounded-lg hover:bg-cyan-600 transition-all font-semibold text-lg shadow-lg hover:shadow-cyan-500/50 inline-flex items-center gap-2"
               >
                 Check Availability <ArrowRight size={20} />
+              </Link>
+              <Link
+                to="/speed-test"
+                className="ml-0 sm:ml-3 mt-3 sm:mt-0 inline-flex items-center gap-2 px-8 py-4 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 text-white transition-all font-semibold text-lg"
+              >
+                <Gauge size={20} /> Test Your Speed
               </Link>
             </div>
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
