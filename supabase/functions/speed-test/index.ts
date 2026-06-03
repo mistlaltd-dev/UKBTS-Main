@@ -13,7 +13,11 @@ const MAX_UPLOAD_BYTES = 50 * 1024 * 1024;
 const CHUNK_SIZE = 256 * 1024;
 
 const baseChunk = new Uint8Array(CHUNK_SIZE);
-crypto.getRandomValues(baseChunk);
+const RANDOM_FILL_LIMIT = 65536;
+for (let offset = 0; offset < CHUNK_SIZE; offset += RANDOM_FILL_LIMIT) {
+  const slice = baseChunk.subarray(offset, Math.min(offset + RANDOM_FILL_LIMIT, CHUNK_SIZE));
+  crypto.getRandomValues(slice);
+}
 
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
