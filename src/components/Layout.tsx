@@ -1,4 +1,4 @@
-import { Phone, Mail, Menu, X, ChevronDown, PhoneCall, Wifi, Building2, Server, Cable, Headset, LogIn, Cloud, Gauge } from 'lucide-react';
+import { Phone, Mail, Menu, X, ChevronDown, PhoneCall, Wifi, Building2, Server, Cable, Headset, LogIn, Cloud } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -61,12 +61,6 @@ export default function Layout({ children }: LayoutProps) {
       path: '/management',
       description: '24/7 monitoring and proactive support',
       icon: Headset
-    },
-    {
-      name: 'Broadband Speed Test',
-      path: '/speed-test',
-      description: 'Check your current download and upload speed',
-      icon: Gauge
     },
   ];
 
